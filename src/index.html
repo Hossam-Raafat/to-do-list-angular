@@ -19,8 +19,29 @@
   </head>
 
 
-  <body ng-app="app">
-    <app>Loading...</app>
+  <body ng-app="todo-app">
+    <div ng-controller="todo-controller">
+    <form ng-submit="addItem()">
+      <p>
+        <label for="item">Add Item</label>
+        <input type="text" id="item" required ng-model="itemForm">
+      </p>
+      <button>Add Item</button>
+    </form>
+      <table>
+        <thead>
+          <tr>
+            <th>{{ toDo }}</th>
+            <th>{{ done }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in items">
+            <td>{{ item.body }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 
   <!-- build:js({.tmp,src}) scripts/vendor.js -->
