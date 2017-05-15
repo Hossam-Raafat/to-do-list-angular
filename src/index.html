@@ -32,12 +32,18 @@
         <thead>
           <tr>
             <th>{{ toDo }}</th>
-            <th>{{ done }}</th>
-          </tr>
+<!--             <th>{{ done }}</th>
+ -->          </tr>
         </thead>
         <tbody>
           <tr ng-repeat="item in items">
-            <td>{{ item.body }} <button ng-click="deleteItem(item)">Delete</button></td>
+              <td ng-hide="editing" ng-dblclick="editing = true">{{ item.body }} <button ng-click="deleteItem(item)">Delete</button> <label>Done <input type="checkbox" ng-change="doneItems(item)" ng-model="item.status"></label></td>
+              <td ng-show="editing">
+                <form ng-submit="editItem(item); editing = false">
+                  <input type="text" required ng-model="item.body">
+                  <button type="submit">Done editing</button>
+                </form>
+              </td>
           </tr>
         </tbody>
       </table>
