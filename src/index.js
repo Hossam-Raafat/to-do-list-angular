@@ -17,7 +17,7 @@ app.controller(
 			var add = {
 				body: $scope.itemForm
 			}
-			$http.post('http://localhost:3000/items.json', add).then(
+			$http.post('http://localhost:3000/items.json',{ item: add}).then(
 				function(success){
 					$scope.itemForm = '';
 					$scope.items.push(success.data);
@@ -26,6 +26,11 @@ app.controller(
 					console.log(err);
 				})
 		}
-
-			
+		$scope.deleteItem = function(item){
+			$http.delete('http://localhost:3000/items/'+ item.id +'.json').then(
+				function(success){
+					var index = $scope.items.indexOf(item);
+					$scope.items.splice(index, 1);
+				})
+		}
 	});
